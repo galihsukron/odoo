@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+
+<!-- location -->
+ 		<record id="sl_asset.location1" model="asset.location">
+ 			<field name="name">Semarang</field>
+ 			<field name="longitude">110.3576660156250568</field>
+ 			<field name="latitude">-7.1881008711790226</field>
+ 		</record>
+
+ 		<record id="sl_asset.location2" model="asset.location">
+ 			<field name="name">Padang</field>
+ 			<field name="longitude">100.4150390625000426</field>
+ 			<field name="latitude">-0.6591651462894508</field>
+ 		</record>
+
+ 		<record id="sl_asset.location3" model="asset.location">
+ 			<field name="name">Surabaya</field>
+ 			<field name="longitude">112.6977539062500426</field>
+ 			<field name="latitude">-7.3406748318549164</field>
+ 		</record>
+
+		
+<!-- assset types -->
+ 		<record id="sl_asset.assettype_bor" model="asset.type">
+ 			<field name="name">Drill</field>
+ 		</record>
+ 		<record id="sl_asset.assettype_bandsaw" model="asset.type">
+ 			<field name="name">Band Saw</field>
+ 		</record>
+
+
+<!-- asssets -->
+ 		<record id="sl_asset.asset1" model="asset.asset">
+            <field name="name">Borland SX900</field>
+            <field name="image" file="sl_asset/data/img/bor.jpg" type="base64" />
+            <field name="type_id" ref="sl_asset.assettype_bor" />
+        </record>
+
+ 		<record id="sl_asset.asset2" model="asset.asset">
+            <field name="name">Borland NJ700</field>
+            <field name="image" file="sl_asset/data/img/bor.jpg" type="base64" />
+            <field name="type_id" ref="sl_asset.assettype_bor" />
+        </record>
+
+ 		<record id="sl_asset.asset3" model="asset.asset">
+            <field name="name">Maktec F6000 A60096</field>
+            <field name="image" file="sl_asset/data/img/bandsaw.jpg" type="base64" />
+            <field name="type_id" ref="sl_asset.assettype_bandsaw" />
+        </record>
+
+<!-- move -->
+ 		<record id="sl_asset.move1" model="asset.move">
+            <field name="asset_id" ref="sl_asset.asset1" />
+            <field name="location_id" ref="sl_asset.location1" />
+            <field name="pic_partner" ref="base.res_partner_address_3" />
+ 			<field name="longitude">110.3576660156250568</field>
+ 			<field name="latitude">-7.1881008711790226</field>
+ 		</record>
+
+ 		<record id="sl_asset.move2" model="asset.move">
+            <field name="asset_id" ref="sl_asset.asset2" />
+            <field name="location_id" ref="sl_asset.location2" />
+            <field name="pic_partner" ref="base.res_partner_address_5" />
+ 			<field name="longitude">100.4150390625000426</field>
+ 			<field name="latitude">-0.6591651462894508</field>
+ 		</record>
+
+ 		<record id="sl_asset.move3" model="asset.move">
+            <field name="asset_id" ref="sl_asset.asset3" />
+            <field name="location_id" ref="sl_asset.location3" />
+            <field name="pic_partner" ref="base.res_partner_address_10" />
+ 			<field name="longitude">112.6977539062500426</field>
+ 			<field name="latitude">-7.3406748318549164</field>
+ 		</record>		
+</data>
+</openerp>

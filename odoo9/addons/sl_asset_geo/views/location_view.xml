@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+ <!-- asset.location -->
+        <record id="view_location_form_map" model="ir.ui.view">
+            <field name="name">asset.location.form</field>
+            <field name="model">asset.location</field>
+            <field name="inherit_id" ref="sl_asset.view_location_form"/>
+            <field name="arch" type="xml">
+	            <data>
+	            	<!-- <xpath expr="//field[@name='latitude']" position="attributes">
+                		<attribute name="invisible">True</attribute>
+            		</xpath>
+	            	<xpath expr="//field[@name='longitude']" position="attributes">
+                		<attribute name="invisible">True</attribute>
+            		</xpath>
+	               <xpath expr="//field[@name='child_ids']" position="before">
+	               		<group>
+	               		<field name="the_point" widget="geo_edit_map"/>
+	               		</group>
+               		</xpath>        -->
+               		<xpath expr="//field[@name='longitude']" position="after">
+                		<field name="latlng" widget="geo_box" geo="{'type':'Point','kind':'LatLng'}" readonly="0"/>
+               		</xpath>                            
+	            </data>
+            </field>
+        </record>   
+        
+<!-- GeoEngine views -->
+        <record id="ir_ui_view_asset_location_view0" model="ir.ui.view">
+            <field name="name">Asset Location Spatial view</field>
+            <field name="model">asset.location</field>
+            <field name="arch" type="xml">
+                <geo>
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="image_small"/>
+                    <field name="latitude" geo="{'type':'Point','kind':'Lat','field_lng':'longitude'}"/>
+                    <field name="longitude"/>
+                    <templates>
+<!--                         <tpl t-name="marker-latlng"> -->
+<!--                             [<field name="latitude"/>,<field name="longitude"/>] -->
+<!--                         </tpl> -->
+                        <tpl t-name="marker-popup">
+                            <!-- <field name="image" widget='attachment_image' class="oe_avatar" options='{"preview_image": "image_medium", "size": [90, 90]}'/> -->
+                            <t t-if="record.image_small.raw_value">
+                                <img t-att-src="geo_image('asset.location', 'image_small', record.id.value)"/>
+                            </t>
+	                          <field name="name"/> <strong><field name="company_id"/></strong><br/>
+                              @<field name="latitude"/>,<field name="longitude"/> 
+                        </tpl>
+                  </templates>
+                </geo>
+            </field>
+            <field eval="16" name="priority"/>
+        </record>
+        
+        <record id="sl_asset.location_asset_act" model="ir.actions.act_window">
+            <field name="view_mode">tree,form,geo</field>
+        </record>
+    </data>
+</openerp>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <!-- THIS IS DYNAMIC ATTRIBUTES. 
+    	 means it once installed wouldn't be modified by framework,
+    	 but, user may change it dynamically by modify the asset.attribute -->
+    	 
+	<data noupdate="1">
+	
+	    	    
+<!--     Flow additional fields -->
+        <record id="tracking_flow_attributed_view" model="ir.ui.view">
+            <field name="name">asset.type.attributed</field>
+            <field name="model">asset.type</field>
+            <field name="inherit_id" ref="sl_asset.view_type_form"/>
+            <field name="arch" type="xml">
+<!--                 dummy, will be modified by groups -->
+                
+                <xpath expr="//field[@name='name']" position="after">
+                <field name="attributes_id" /> 
+                <field name="visibility_ids">
+                	<tree editable="bottom">
+                		<field name="attribute_id"/>
+                		<field name="visibility"/>
+                	</tree>
+                </field>
+                
+                </xpath>                
+            </field>
+        </record> 
+
+        
+    
+        <record id="tracking_item_view" model="ir.ui.view">
+            <field name="name">tracking.item.attributed</field>
+            <field name="model">asset.asset</field>
+            <field name="inherit_id" ref="sl_asset.asset_asset_form"/>
+            <field name="arch" type="xml">
+                <!-- dummy, will be modified by groups -->
+                <!-- field name="attribute_ids" position="after"/-->
+                <field name="dummies" position="after"/>
+            </field>
+        </record>
+
+        
+		
+    </data>
+</openerp>

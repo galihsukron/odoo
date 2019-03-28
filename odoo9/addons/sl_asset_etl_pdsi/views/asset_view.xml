@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+	<record model='ir.ui.view' id='asset_asset_pdsi_form'>
+       <field name="name">asset.asset.pdsi.form</field>
+       <field name="model">asset.asset</field>
+       <field name="inherit_id" ref="sl_asset.asset_asset_form"/>       
+       <field name="arch" type="xml">
+	       	<xpath expr="//group[@id='additional_info']" position="inside">
+ 	            <field name="pdsi_epc"  /> 
+				<field name="pdsi_no_eqid"  />
+	            <field name="pdsi_no_movable"  />
+				<field name="pdsi_kd_asset" />
+	            <field name="pdsi_deskripsi" string="Cost Center"/>
+	            <field name="no_sap"  />
+	<!--            <field name="pdsi_lastupdate"  /> -->
+
+	       	</xpath>
+       </field>
+    </record>
+        
+
+	<record model='ir.ui.view' id='asset_asset_pdsi_tree'>
+       <field name="name">asset.asset.pdsi.tree</field>
+       <field name="model">asset.asset</field>
+       <field name="inherit_id" ref="sl_asset.asset_asset_tree"/>       
+       <field name="arch" type="xml">
+	       	<xpath expr="//field[@name='log_location']" position="before">
+	            <field name="pdsi_no_eqid"  />
+	            <field name="pdsi_no_movable"  />
+	            <!-- <field name="pdsi_deskripsi"  /> -->
+	            <field name="no_sap"  />
+
+	       	</xpath>
+       </field>
+    </record>
+        
+
+	<record model='ir.ui.view' id='asset_asset_pdsi_search'>
+       <field name="name">asset.asset.pdsi.search</field>
+       <field name="model">asset.asset</field>
+       <field name="inherit_id" ref="sl_asset.asset_asset_search"/>       
+       <field name="arch" type="xml">
+	       	<xpath expr="//field[@name='type_id']" position="after">
+	       		<field name="pdsi_no_eqid" filter_domain="[('pdsi_no_eqid','ilike',self)]" />
+	       		<field name="pdsi_no_movable" filter_domain="[('pdsi_no_movable','ilike',self)]" />
+	       		<!-- <field name="pdsi_deskripsi" filter_domain="[('pdsi_deskripsi','ilike',self)]" /> -->
+	       		<field name="no_sap"  />
+
+	       	</xpath>
+       </field>
+    </record>
+        
+
+<!-- ASSET TYPE -->
+
+	<record model='ir.ui.view' id='asset_type_pdsi_form'>
+       <field name="name">asset.type.pdsi.form</field>
+       <field name="model">asset.type</field>
+       <field name="inherit_id" ref="sl_asset.view_type_form"/>       
+       <field name="arch" type="xml">
+	       	<xpath expr="//group[@id='additional_info']" position="inside">
+	            <field name="pdsi_subsection"  />
+	            <field name="pdsi_level"  />
+	       	</xpath>
+	       	<xpath expr="//field[@name='child_ids']/tree/field[@name='name']" position="after">
+	            <field name="pdsi_subsection"  />
+	            <field name="pdsi_level"  />
+	       	</xpath>                
+       </field>
+    </record>
+        
+        <record model='ir.ui.view' id='asset_type_pdsi_tree'>
+            <field name="name">asset.type.tree</field>
+            <field name="model">asset.type</field>
+	        <field name="inherit_id" ref="sl_asset.view_type_tree"/>       
+            <field name="arch" type="xml">
+		       	<xpath expr="//field[@name='name']" position="after">
+		            <field name="pdsi_subsection"  />
+		       	</xpath>                
+            </field>
+        </record>
+        
+		<record id="assettype_pdsi_hierarchy" model="ir.ui.view">
+            <field name="name">asset.type.hierarchy</field>
+            <field name="model">asset.type</field>
+	        <field name="inherit_id" ref="sl_asset.assettype_hierarchy_view"/>       
+            <field name="arch" type="xml">
+		       	<xpath expr="//field[@name='name']" position="after">
+		            <field name="pdsi_subsection"  />
+		            <field name="pdsi_level"  />
+		       	</xpath>                
+            </field>
+        </record>        
+
+
+<!-- LOCATION -->
+
+	<record model='ir.ui.view' id='asset_location_pdsi_form'>
+       <field name="name">asset.location.pdsi.form</field>
+       <field name="model">asset.location</field>
+       <field name="inherit_id" ref="sl_asset.view_location_form"/>       
+       <field name="arch" type="xml"> 
+	       	<xpath expr="//group[@id='additional_info']" position="inside">
+	            <field name="pdsi_kd_rig"  />
+	       	</xpath>
+       </field>
+    </record>
+        
+
+	<record model='ir.ui.view' id='asset_location_pdsi_tree'>
+       <field name="name">asset.location.pdsi.tree</field>
+       <field name="model">asset.location</field>
+       <field name="inherit_id" ref="sl_asset.view_location_tree"/>       
+       <field name="arch" type="xml"> 
+	       	<xpath expr="//field[@name='complete_name']" position="after">
+	            <field name="pdsi_kd_rig"  />
+	       	</xpath>
+       </field>
+    </record>
+        
+
+
+    </data>
+</openerp>

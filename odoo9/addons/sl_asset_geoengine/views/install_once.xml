@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+	
+	<!--  -->
+    <function model="ir.module.module" name="_fixup_web_editor_img_css"/>
+        
+    </data>
+</openerp>

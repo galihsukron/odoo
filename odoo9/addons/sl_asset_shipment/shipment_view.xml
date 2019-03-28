@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+    
+<!-- ir model Shipment -->
+	<record id="view_asset_shipments_form" model="ir.ui.view">
+		<field name="model">asset.shipment</field>
+		<field name="arch" type="xml">
+			<form string="Shipment">
+				<header>
+					<!-- SHIPMENT -->
+					<button string="Confirm Delivering" name="action_delivering" states="draft" type="object" class="btn-primary"/>
+					
+					<!-- HANDOVER -->
+					<!-- <button string="New Handover" name="action_new_handover" type="object" class="btn-primary"
+						attrs="{'invisible':['|',('party_state','!=','done'),('state','!=','delivering')]}"/>
+					<button string="Confirm Asset Condition" name="action_lock_asset" type="object" class="btn-primary"
+						attrs="{'invisible':['|',('party_state','!=','draft'),('state','!=','delivering')]}"/>
+					<button string="Sender Approve" name="action_handover_sent" type="object"  
+						attrs="{'invisible':['|',('party_state','!=','draft'),('state','!=','delivering')]}"/>
+					<button string="Recepient Approve" name="action_handover_received" type="object" 
+						attrs="{'invisible':['|',('party_state','!=','draft'),('state','!=','delivering')]}"/>
+					
+					<button string="Sender Approve" name="action_handover_sent" type="object" class="btn-primary"
+						attrs="{'invisible':['|',('party_state','not in',['confirmed']),('state','!=','delivering')]}"/> 
+					<button string="Recepient Approve" name="action_handover_received" type="object" class="btn-primary"
+						attrs="{'invisible':['|',('party_state','not in',['sent']),('state','!=','delivering')]}"/>
+					 -->
+					<button string="Shipment Done" name="action_done" type="object" class="btn-primary"
+						attrs="{'invisible':[('state','!=','delivering')]}"/>
+					
+                   	<field name="state" widget="statusbar" statusbar_visible="draft,delivering,sale,done"/>
+               </header>
+			
+			  <sheet>
+			  	<div class="oe_title">
+                    <h1>
+                        <field name="name"
+                        	attrs="{'readonly':[('state','!=','draft')]}"/>
+                    </h1>
+                </div>
+                <group>
+					<group>						
+						<field name="origin_loc_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+						<field name="destination_loc_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+						<!-- <field name="asset_planned"/> -->
+
+						<field name="date_created" attrs="{'readonly':[('state','!=','draft')]}"/>
+						<field name="date_x_departure" attrs="{'readonly':[('state','!=','draft')]}"/>
+						<field name="date_x_completion" attrs="{'readonly':[('state','!=','draft')]}"/>
+					</group>
+				
+					<group>											
+						<field name="note"/>
+					</group>
+				</group>
+				
+				<notebook>
+					<page string="Planned Assets">
+						<field name="planned_asset_ids">
+							<tree editable="bottom">
+								<field name="asset_id"/>
+						   		<field name="asset_type"/>
+						   		<field name="image_small" widget="image" height="54"/>
+						   		<field name="eta" />
+							</tree>
+						</field>
+					</page>
+					<page string="PIC Transfer Histories">
+						<group string="PIC Transfer">
+						  <field name="party_ids"  nolabel="1">
+							<tree>
+								<field name="date"/>
+								<field name="from_partner_id"/>
+								<field name="to_partner_id"/>
+								<!-- <field name="pic_partner"/> -->
+								
+								<field name="asset_total"/>
+								<field name="asset_added"/>
+								<field name="asset_missing"/>
+								<!-- <field name="state"/> -->
+								<field name="note"/>
+								<button string="See detail" name="action_dummy" type="object" class="btn-primary" />
+							</tree>
+						  </field>
+						  </group>
+					</page>
+					<page string="Asset List History">
+						<group string="Planned vs Last asset">
+						  <field name="lastvsplan_ids"  nolabel="1">
+							<tree>
+								<field name="asset_id"/>
+								<field name="asset_type"/>
+								<field name="state"/>
+							</tree>
+						  </field>
+						</group>
+					</page>
+				</notebook>
+	  <group string="Summary">
+	  	<field name="asset_planned"/>
+	  	<field name="asset_equal"/>
+	  	<field name="asset_missing"/>
+	  	<field name="asset_added"/>
+	  	<field name="asset_total"/>
+	  </group>
+	  
+	  
+	  
+	</sheet>
+	<div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread" options='{"thread_level": 1}'/>
+                    </div>
+  </form>
+ </field>
+</record>
+        <record id="view_asset_shipments_tree" model="ir.ui.view">
+            <field name="model">asset.shipment</field>
+            <field name="arch" type="xml">
+                <tree string="Shipment">
+                    <field name="date_created"/>
+                    <field name="name"/>
+                    <field name="origin_loc_id"/>
+                    <field name="destination_loc_id"/>
+                    <field name="state"/>
+                    <!-- <field name="location_id" string="Last Position"/> -->
+                    <!-- <field name="pic_partner" string="Last PIC" help="Person in charge"/> -->
+                </tree>
+            </field>
+        </record>
+        <record id="view_asset_shipments_search" model="ir.ui.view">
+            <field name="model">asset.shipment</field>
+            <field name="arch" type="xml">
+                <search string="Shipment">
+                    <field name="name" filter_domain="[('name','ilike',self)]"/>
+                    <field name="state"/>
+                  <!--   <filter icon="terp-gnome-cpu-frequency-applet+"
+                        string="Required"
+                        domain="[('required', '=', True)]"/>
+                    <separator/>
+                    <filter icon="terp-dialog-close"
+                        string="Readonly"
+                        domain="[('readonly', '=', True)]"/>
+                    <separator/>
+                    <filter 
+                        string="Custom"
+                        domain="[('state', '=', 'manual')]"/>
+                    <filter 
+                        string="Base"
+                        domain="[('state', '=', 'base')]"/>
+                    <separator/>
+                    <filter icon="terp-translate"
+                        string="Translate"
+                        domain="[('translate', '=', True)]"/>
+                    <field name="model_id"/>
+                    <field name="ttype"/>
+                    <field name="required"/>
+                    <field name="readonly"/> -->
+                    <group expand="1" string="Group By">
+                        <!-- <filter string="Object" icon="terp-stock_align_left_24" domain="[]" context="{'group_by':'model_id'}"/> -->
+                        <filter string="Origin" icon="terp-stock_align_left_24" context="{'group_by':'origin_loc_id'}"/>
+                        <filter string="Destination" icon="terp-stock_align_left_24" context="{'group_by':'destination_loc_id'}"/>
+                        <filter string="State" context="{'group_by':'state'}"/>
+                    </group> 
+                </search>
+            </field>
+        </record>
+        <record id="action_asset_shipments" model="ir.actions.act_window">
+            <field name="name">Shipment</field>
+            <field name="res_model">asset.shipment</field>
+            <field name="view_type">form</field>
+            <!-- <field name="context">{'manual':True}</field> -->
+            <field name="view_id" ref="view_asset_shipments_tree"/>
+        </record>
+        <menuitem action="action_asset_shipments" id="ir_model_asset_shipments" parent="sl_asset.menu_asset" sequence="1"/>
+
+	
+	
+		
+    </data>
+</openerp>

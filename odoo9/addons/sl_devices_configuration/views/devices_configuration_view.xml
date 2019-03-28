@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+    
+    <record id="view_device_configurations_tree" model="ir.ui.view">
+            <field name="name">device.configurations.tree</field>
+            <field name="model">device.configurations</field>
+            
+            <field name="arch" type="xml">
+                <tree string="Companies">
+                    <field name="device_serial_number"/>
+                    <field name="def_location" />
+	                <field name="device_last_update" />
+                </tree>
+            </field>
+        </record>
+    <record id="view_device_configurations_form" model="ir.ui.view">
+            <field name="name">device.configurations.form</field>
+            <field name="model">device.configurations</field>
+            <field name="arch" type="xml">
+                <form string="Device Configurations">
+                    <sheet>
+                    	<group>	
+                    		<field name="device_serial_number" class="oe_inline"/> 
+                    		<field name="def_location" />
+                    		<field name="location_def_active" />
+		                    <field name="device_last_update" />
+		                    
+		                    
+		                    
+		                    <field name="server_ip" />
+		                    <field name="server_port" />
+		                    <field name="server_db_name" />
+		                    <field name="server_user" />
+		                    <field name="server_password" />
+		                    
+		                    
+		                    <field name="gps_plugin" />
+		                    <field name="gps_service" />
+		                    <field name="gps_required" />
+		                    
+		                    
+		                    <field name="rfid_assembly" />
+		                    <field name="rfid_threaded" />
+		                    <field name="rfid_power" />
+		                    
+		                    
+		                    <field name="sync_service_timespan" />
+		                    <field name="sync_active" />
+		                    <field name="sync_batch_treshold" />
+		                    
+		                    
+		                    <field name="fingergrabber" />
+		                    <field name="fingergrab_threaded" />
+		                    <field name="fingerprint_bmpParser" />
+		                    
+		                    
+		                    
+		                    <field name="wifi_plugin" />
+		                    
+		                    
+		                    <field name="user_id_setting" />
+		                    <field name="setup_firsttime" />
+		                    <field name="del_prev_scan" />
+		                    <field name="instalation_date" />
+		                    
+		                </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    
+    
+    <record id="device_configurations_act" model="ir.actions.act_window">
+            <field name="name">Device Conf</field>
+            <field name="res_model">device.configurations</field>
+            <field name="view_type">form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a device configurations.
+              </p><p>
+                You can create new device configurations so you can control using this application.
+              </p>
+            </field>
+        </record>
+    <menuitem action="device_configurations_act" id="menu_device_configurations_tree" parent="sl_asset.menu_asset_configuration" sequence="15"/>
+
+
+
+    </data>
+</openerp>

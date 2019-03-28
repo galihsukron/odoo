@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+	  
+        
+<!-- GeoEngine views -->
+        <record id="ir_ui_view_assetasset_view0" model="ir.ui.view">
+            <field name="name">Asset Geo Engine view</field>
+            <field name="model">asset.asset</field>
+            <field name="arch" type="xml">
+                <geoengine>
+                    <field name="name" select="1"/>
+                    <field name="state"/>
+                    
+                </geoengine>
+            </field>
+            <field eval="16" name="priority"/>
+        </record>
+        
+		<record id="vector_layer_assetasset_point0" model="geoengine.vector.layer">
+            <field name="geo_field_id" ref="sl_asset_geoengine.field_asset_asset_log_point"/>
+            <field name="name">Asset Geo Engine Basic point</field>
+            <field eval="6" name="sequence"/>
+            <field name="view_id" ref="ir_ui_view_assetasset_view0"/>
+            <field name="geo_repr">basic</field>
+            <field eval="1" name="nb_class"/>
+            <field name="begin_color">#FF680A</field>
+        </record>
+        <!-- <record id="vector_layer_assetasset_line0" model="geoengine.vector.layer">
+            <field name="geo_field_id" ref="sl_asset_asset.asset_asset_the_line"/>
+            <field name="name">Asset GeoEngine Basic Line</field>
+            <field eval="6" name="sequence"/>
+            <field name="view_id" ref="ir_ui_view_assetasset_view0"/>
+            <field name="geo_repr">basic</field>
+            <field eval="1" name="nb_class"/>
+            <field name="begin_color">#FF680A</field>
+        </record> -->
+        <record id="vector_layer_assetassetstatecolored0" model="geoengine.vector.layer">
+            <field name="geo_field_id" ref="sl_asset_geoengine.field_asset_asset_log_point"/>
+            <field name="name">Asset Geo Engine State colored</field>
+            <field name="classification">unique</field>
+            <field eval="6" name="sequence"/>
+            <field name="view_id" ref="ir_ui_view_assetasset_view0"/>
+            <field name="geo_repr">colored</field>
+            <field eval="1" name="nb_class"/>
+            <field name="attribute_field_id" ref="sl_asset.field_asset_asset_state"/>
+            <field name="begin_color">#FF680A</field>
+        </record>
+                
+        <record id="raster_layer_assetassetmapbox" model="geoengine.raster.layer">
+            <field name="raster_type">mapbox</field>
+            <field name="mapbox_id">camptocamp.map-ok288g0c</field>
+            <field name="name">Asset Geo Engines Mapbox</field>
+            <field name="view_id" ref="ir_ui_view_assetasset_view0"/>
+            <field eval="0" name="overlay"/>
+        </record>
+        <record id="raster_layer_basic0" model="geoengine.raster.layer">
+            <field name="raster_type">d_wms</field>
+            <field name="name">Asset Geo Engines Basic</field>
+            <field name="url">vmap0.tiles.osgeo.org/wms/vmap0</field>
+            <field name="view_id" ref="ir_ui_view_assetasset_view0"/>
+            <field eval="1" name="overlay"/>
+        </record>
+        
+
+        
+        <record id="sl_asset.asset_asset_act" model="ir.actions.act_window">
+            <field name="view_mode">kanban,tree,form,geoengine</field>
+        </record>
+
+    </data>
+</openerp>

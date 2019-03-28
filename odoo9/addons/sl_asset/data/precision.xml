@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data noupdate="1">
+
+<!--  Precisions  -->
+        <record forcecreate="True" id="decimal_asset_coordinate" model="decimal.precision">
+            <field name="name">Asset Geo Location</field>
+            <field name="digits">16</field>
+        </record>
+		
+	</data>
+</openerp>

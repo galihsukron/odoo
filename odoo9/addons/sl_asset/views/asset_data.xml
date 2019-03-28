@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <!-- Requests Links -->
+        <record id="req_link_item" model="res.request.link">
+            <field name="name">Tracking Item</field>
+            <field name="object">asset.asset</field>
+        </record>
+
+
+        <!-- Task-related subtypes for messaging / Chatter -->
+        <record id="mt_item_new" model="mail.message.subtype">
+            <field name="name">Item Created</field>
+            <field name="res_model">asset.asset</field>
+            <field name="default" eval="False"/>
+            <field name="hidden" eval="True"/>
+            <field name="description">Item created</field>
+        </record>
+
+        <record id="mt_item_complete" model="mail.message.subtype">
+            <field name="name">Item Complete</field>
+            <field name="res_model">asset.asset</field>
+            <field name="default" eval="False"/>
+            <field name="description">Item Complete</field>
+        </record>
+		
+		
+		 <record id="mt_project_task_assigned" model="mail.message.subtype">
+            <field name="name">Task Assigned</field>
+            <field name="sequence">11</field>
+            <field name="res_model">asset.asset</field>
+            <field name="default" eval="False"/>
+            <field name="parent_id" eval="ref('mt_item_complete')"/>
+           <!--  <field name="relation_field">project_id</field> -->
+        </record>
+    </data>
+</openerp>

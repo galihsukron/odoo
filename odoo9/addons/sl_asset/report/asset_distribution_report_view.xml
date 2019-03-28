@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_asset_distribution_report_pivot" model="ir.ui.view">
+            <field name="name">asset.distribution.report.pivot</field>
+            <field name="model">asset.distribution.report</field>
+            <field name="arch" type="xml">
+                <pivot string="Project Issue" disable_linking="True">
+                    <field name="location_id" type="row"/>
+                    <!-- <field name="inspection_date" interval="month" type="col"/> -->
+                    <field name="type_id" type="col"/>
+                    <field name="nbr" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="view_asset_distribution_report_graph" model="ir.ui.view">
+            <field name="name">asset.distribution.report.graph</field>
+            <field name="model">asset.distribution.report</field>
+            <field name="arch" type="xml">
+                <graph string="Project Issue">
+                    <field name="location_id" type="row"/>
+                    <!-- <field name="inspection_date" interval="month" type="col"/> -->
+                    <field name="type_id" type="col"/>
+                    <field name="nbr" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- Custom reports (aka filters) -->
+        <record id="filter_issue_report_delay" model="ir.filters">
+            <field name="name">Delay</field>
+            <field name="model_id">asset.distribution.report</field>
+            <field name="user_id" eval="False"/>
+            <field name="context">{'group_by': ['location_id'], 'measures': ['type_id']}</field>
+        </record>
+        <record id="filter_issue_report_responsible" model="ir.filters">
+            <field name="name">By Responsible</field>
+            <field name="model_id">asset.distribution.report</field>
+            <field name="user_id" eval="False"/>
+            <field name="context">{'group_by': ['location_id', 'log_pic']}</field>
+        </record>
+
+        <record id="view_asset_distribution_report_filter" model="ir.ui.view">
+            <field name="name">asset.distribution.report.select</field>
+            <field name="model">asset.distribution.report</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="location_id"/>
+                    <!-- <field name="user_id"/>
+                    <field name="partner_id" filter_domain="[('partner_id', 'child_of', self)]"/>
+                    <field name="stage_id"/>
+                    <filter string="Unassigned" name="unassigned" domain="[('user_id','=',False)]"/> -->
+                    <separator/>
+                    <!-- <filter string="New" name="new" domain="[('stage_id.sequence', '&lt;=', 1)]"/> -->
+                    <group  expand="1" string="Group By">
+                    	<filter string="Asset Type" name="asset_type" context="{'group_by':'type_id'}" />
+                    	<filter string="Location" name="location" context="{'group_by':'location_id'}" />
+                        <!-- <filter string="Assigned to" name="Responsible" context="{'group_by':'user_id'}" />
+                        <filter string="Project" name="project" context="{'group_by':'project_id'}" />
+                        <filter string="Priority" context="{'group_by':'priority'}" />
+                        <filter string="Stage" context="{'group_by':'stage_id'}"/> -->
+                        <filter string="Company" context="{'group_by':'company_id'}" groups="base.group_multi_company"/>
+                        <separator/>
+                        <!-- <filter string="Create Day" context="{'group_by':'create_date:day'}" help="Create Date"/> -->
+                   </group>
+               </search>
+            </field>
+        </record>
+
+        <record id="action_asset_distribution_report" model="ir.actions.act_window">
+            <field name="name">Asset Distribution Analysis</field>
+            <field name="res_model">asset.distribution.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">pivot,graph</field>
+            <field name="context">{'search_default_location':1}</field>
+            <field name="search_view_id" ref="view_asset_distribution_report_filter"/>
+            <field name="view_id"></field>  <!-- force empty -->
+            <field name="help">This report on the project issues allows you to analyse the quality of your support or after-sales services. You can track the issues per age. You can analyse the time required to open or close an issue, the number of email to exchange and the time spent on average by issues.</field>
+        </record>
+
+        <record id="action_asset_distribution_report_filtered" model="ir.actions.act_window">
+            <field name="name">Distribution Analysis</field>
+            <field name="res_model">asset.distribution.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">pivot,graph</field>
+            <field name="context">{
+                'search_default_year':1,
+                'search_default_This Month':1,
+                'search_default_location':1,
+                'search_default_location_id': [active_id],
+                'default_location_id': active_id,
+            }
+            </field>
+            <field name="search_view_id" ref="view_asset_distribution_report_filter"/>
+            <field name="view_id"></field>  <!-- force empty -->
+            <field name="help">This report on the project issues allows you to analyse the quality of your support or after-sales services. You can track the issues per age. You can analyse the time required to open or close an issue, the number of email to exchange and the time spent on average by issues.</field>
+        </record>
+
+        <menuitem action="action_asset_distribution_report" id="menu_asset_distribution_report_tree"
+            parent="menu_asset_report"/>
+
+
+  </data>
+</openerp>

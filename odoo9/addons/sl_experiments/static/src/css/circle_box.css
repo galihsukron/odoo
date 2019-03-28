@@ -1,0 +1,29 @@
+.openerp .oe_application .oe-view-manager-view-circle {
+    background: url(/web/static/src/img/form_sheetbg.png);
+    border-bottom: 1px solid #ddd;
+}
+    
+.node {
+    stroke: #fff;
+    stroke-width: 1.5px;
+}
+.link {
+    stroke: #999;
+    stroke-width: 2px;
+    stroke-opacity: .6;
+}
+
+path.link {
+  fill: none;
+  stroke: #000;
+  stroke-width: 2px;
+  cursor: default;
+}
+
+.nodetext {
+    fill:#E1FAFA;
+    font-size:14px;
+}
+.nodetext.shadow {
+    fill:#252929;
+}

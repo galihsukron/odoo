@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <!-- alias domain: asset.config.settings -->
+        <function id="default_alias_domain_asset" model="ir.values" name="set_default" eval="('asset.config.settings', 'generate_asset_alias', 1)"/>
+    
+        <!-- After installation of the module, open the related menu -->
+       <!--  <record id="action_client_asset_menu" model="ir.actions.client">
+            <field name="name">Open Asset Menu</field>
+            <field name="tag">reload</field>
+            <field name="params" eval="{'menu_id': ref('base.menu_main_pm')}"/>
+        </record> 
+        <record id="base.open_menu" model="ir.actions.todo">
+            <field name="action_id" ref="action_client_asset_menu"/>
+            <field name="state">open</field>
+        </record> -->
+    </data>
+    <data>
+        <record id="view_config_settings" model="ir.ui.view">
+            <field name="name">asset settings</field>
+            <field name="model">asset.config.settings</field>
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                <form class="oe_form_configuration">
+                    <header>
+                        <button string="Apply" type="object" name="execute" class="oe_highlight"/>
+                        <button string="Cancel" type="object" name="cancel" class="oe_link"/>
+                    </header>
+                    <group string="Asset Management" name="asset_management">
+                        <field name="module_sl_asset_shipment" />
+                        <field name="module_sl_asset_rfid" />
+                        <field name="module_sl_asset_attribute" />
+                        <!-- <field name="group_time_work_estimation_tasks" on_change="onchange_time_estimation_asset_timesheet(group_time_work_estimation_tasks)" widget="radio"/>
+                        <label for="id" string="Forecasts"/>
+                        <div>
+                              <div>
+                                  <field name="module_asset_forecast" widget="upgrade_boolean"/>
+                                  <label for="module_asset_forecast"/>
+                              </div>
+                         </div> -->
+                    </group>
+                    <group id="etl" string="Export Transfer Load">
+<!--                         <label for="id" string="Extra features"/>
+                        <div>
+                            <field name="module_asset_timesheet_synchro" widget="upgrade_boolean"/>
+                            <label for="module_asset_timesheet_synchro"/>
+                        </div>
+                        <field name="module_asset_issue_sheet" widget="radio"/> -->
+                    </group>
+                    <!-- <group string="Helpdesk &amp; Support">
+                        <field name="module_rating_asset" widget="radio"/>
+                    </group> -->
+                </form>
+            </field>
+        </record>
+
+        <record id="action_config_settings" model="ir.actions.act_window">
+            <field name="name">Configure Asset</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">asset.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+        <menuitem id="base.menu_asset_general_settings" name="Settings" parent="menu_asset_maintenance"
+            sequence="0" action="action_config_settings"/>
+    </data>
+</openerp>

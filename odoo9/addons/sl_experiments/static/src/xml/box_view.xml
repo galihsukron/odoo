@@ -1,0 +1,49 @@
+<template>
+
+
+<div t-name="BoxView">
+<h1> Aloha!</h1>
+    <select t-if="toolbar" style="width: 30%">
+    </select>
+    <table class="oe_box_table oe-boxview-table">
+        <thead>
+            <tr>
+<!--                 <th t-foreach="fields_view" t-as="field" -->
+<!--                     t-if="!field.attrs.modifiers.box_invisible" -->
+<!--                     class="boxview-header"> -->
+<!--                     <t t-esc="field_value.attrs.string || fields[field.attrs.name].string" /> -->
+<!--                 </th> -->
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<tr t-name="BoxView.rows"
+        t-foreach="records" t-as="record"
+        t-att-id="'boxrow_' + record.id"
+        t-att-data-id="record.id" t-att-data-level="level + 1"
+        t-att-data-row-parent-id="row_parent_id">
+    <t t-set="children" t-value="record[children_field]"/>
+    <t t-set="class" t-value="children and children.length ? 'boxview-tr' : 'boxview-td'"/>
+    <t t-set="rank" t-value="'oe-boxview-first'"/>
+    <t t-set="style" t-value="'background-position: ' + 19*(level) + 'px; padding-left: ' + (4 + 19*(level)) + 'px;'"/>
+
+     <td t-foreach="fields_view" t-as="field"
+        t-if="!field.attrs.modifiers.box_invisible"
+        t-att-data-id="record.id"
+        t-att-style="color_for(record) + style "
+        t-attf-class="#{class} #{rank} #{(fields[field.attrs.name].type === 'float') or (fields[field.attrs.name].type === 'integer') or (fields[field.attrs.name].type === 'monetary')? 'oe_number' : ''}">
+
+        <span t-if="!field.attrs.modifiers.invisible" >
+            <t t-esc="render(record[field.attrs.name], fields[field.attrs.name])" />
+        </span>
+
+        <t t-set="class" t-value="'boxview-td'"/>
+        <t t-set="rank" t-value="''"/>
+        <t t-set="style" t-value="''"/>
+    </td> 
+</tr>
+
+</template>
