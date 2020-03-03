@@ -1,7 +1,0 @@
-<openerp>
-<data>
-	
-	<menuitem parent="pn2.menu_sc_maintenance" action="wizard_import_planning2_MS2_sqlpure" type="wizard" id="menu_import_planning2_MS2_sqlpure"  sequence="61"/>
-
-</data>
-</openerp>

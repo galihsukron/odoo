@@ -1,5 +1,0 @@
-import asset
-import atemp_asset
-import atemp_asset_type
-import atemp_location
-import res_config

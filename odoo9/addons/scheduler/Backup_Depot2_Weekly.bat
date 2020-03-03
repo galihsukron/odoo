@@ -1,1 +1,0 @@
-E:\WINDOWS\SL\Project\SiodDepot\oe5\release\3.2.0\application_server\bin\addons\scheduler\Backup_Depot2.py weekly

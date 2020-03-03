@@ -1,8 +1,0 @@
-"id","name","model_id/id","group_id/id","perm_read","perm_write","perm_create","perm_unlink"
-"asset_asset_tag_access_right_user","asset_asset_tag_access_right","model_asset_tag","group_asset_user",1,0,0,0
-"asset_state_access_right_user","asset_asset_state_access_right","model_asset_state","group_asset_user",1,0,0,0
-"asset_asset_access_right_user","asset_asset_access_right","model_asset_asset","group_asset_user",1,1,0,0
-"asset_tag_access_right","asset_asset_tag_access_right","model_asset_tag","group_asset_manager",1,1,1,1
-"asset_asset_state_access_right","asset_asset_state_access_right","model_asset_state","group_asset_manager",1,1,1,1
-"asset_asset_access_right","asset_asset_access_right","model_asset_asset","group_asset_manager",1,1,1,1
-"access_asset_location","access_asset_location","model_asset_location","group_asset_manager",1,1,1,1
