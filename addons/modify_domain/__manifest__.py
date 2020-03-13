@@ -4,7 +4,10 @@
     "category": "Purchases",
     "author": "Galih Sukron Insani",
     "website": "https://github.com/galihsukron",
-    "summary": "Modify domain and context in odoo",
+    "summary": """ Logs:
+====================
+- Modify domain and context in odoo
+""",
     "support": "galih.sukron@gmail.com",
     "description": "How to modify domain and context in view odoo.",
     "depends": ["purchase"],
