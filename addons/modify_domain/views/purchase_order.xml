@@ -10,6 +10,9 @@
                     <attribute name="domain">[('child_ids','=',False),('supplier','=',True)]</attribute>
                     <attribute name="context">{'default_supplier':1, 'default_customer':0}</attribute>
                 </xpath>
+                <xpath expr="//field[@name='state']" position="attributes">
+                    <attribute name="statusbar_visible">draft,sent,purchase,new_state</attribute>
+                </xpath>
 
             </field>
         </record>
