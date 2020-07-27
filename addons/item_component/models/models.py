@@ -3,6 +3,9 @@
 from odoo import models, fields, api
 from odoo.exceptions import Warning
 from datetime import datetime, timedelta
+import logging
+
+_logger = logging.getLogger(__name__)
 
 class masterComponent(models.Model):
     _name        = "master.component"
@@ -30,7 +33,10 @@ class itemItem(models.Model):
     
     
     @api.model
-    def create(self,vals):                   
+    def create(self,vals):          
+        for line in vals['component_ids']:
+            if line[2]['percentage'] < 1:
+                raise Warning ("Oops, Total Persentase tidak boleh minus")         
         res =  super(itemItem,self).create(vals)
         total_percentage = 0
         for component in res.component_ids : 
@@ -38,7 +44,7 @@ class itemItem(models.Model):
         if total_percentage >= 0 and total_percentage <= 100 :
             pass
         else:
-            raise Warning ("Oops, Total Persentase tidak boleh melebihi 100%")       
+            raise Warning ("Oops, Total Persentase tidak boleh minus atau melebihi 100%")       
         return res
     
     
@@ -56,7 +62,7 @@ class itemItem(models.Model):
             if total_percentage >= 0 and total_percentage <= 100 :
                 pass
             else:
-                raise Warning ("Oops, Total Persentase tidak boleh melebihi 100%")       
+                raise Warning ("Oops, Total Persentase tidak boleh minus atau melebihi 100%")       
         return super(itemItem,self).write(vals)
         
      
