@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_master_component,master.component,model_master_component,base.group_user,1,1,1,1
+access_master_item,master.item,model_master_item,base.group_user,1,1,1,1
+access_component_item,component.item,model_component_item,base.group_user,1,1,1,1

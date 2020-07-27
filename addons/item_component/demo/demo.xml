@@ -1,0 +1,68 @@
+<odoo>
+    <data>
+        
+          <record id="object0" model="master.component">
+            <field name="name">Kayu</field>
+            <field name="estimation">2</field>
+          </record>
+        
+          <record id="object1" model="master.component">
+            <field name="name">Paku</field>
+            <field name="estimation">1</field>
+          </record>
+        
+          <record id="object2" model="master.component">
+            <field name="name">Lem</field>
+            <field name="estimation">1</field>
+          </record>
+        
+          <record id="object3" model="master.component">
+            <field name="name">Alat Pertukangan</field>
+            <field name="estimation">2</field>
+          </record>
+        
+          <record id="object4" model="master.item">
+            <field name="name">Meja</field>
+            <field name="start_date">2019-07-31</field>
+            <field name="stage_item">draft</field>
+          </record>
+          
+          <record id="object5" model="master.item">
+            <field name="name">Kursi</field>
+            <field name="start_date">2019-07-31</field>
+            <field name="stage_item">ongoing</field>
+          </record>
+          
+          
+          <record id="object6" model="component.item">
+            <field name="item_id" ref="object4"/>
+            <field name="component_id" ref="object0"/>
+            <field name="percentage">80</field>
+          </record>
+          
+          <record id="object7" model="component.item">
+            <field name="item_id" ref="object4"/>
+            <field name="component_id" ref="object1"/>
+            <field name="percentage">20</field>
+          </record>
+          
+          
+          <record id="object8" model="component.item">
+            <field name="item_id" ref="object5"/>
+            <field name="component_id" ref="object1"/>
+            <field name="percentage">80</field>
+          </record>
+          
+          <record id="object9" model="component.item">
+            <field name="item_id" ref="object5"/>
+            <field name="component_id" ref="object0"/>
+            <field name="percentage">10</field>
+          </record>
+          
+          <record id="object10" model="component.item">
+            <field name="item_id" ref="object5"/>
+            <field name="component_id" ref="object2"/>
+            <field name="percentage">10</field>
+          </record>
+    </data>
+</odoo>

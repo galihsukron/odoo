@@ -1,0 +1,14 @@
+
+<templates>
+	<t t-name="customImport">
+        <button t-if='widget.modelName == "master.item"' type="button" class="btn btn-sm btn-default o_button_import_custom">
+            Custom Import
+        </button>
+    </t>
+
+	<t t-extend = "ListView.buttons">
+		<t t-jquery="button.o_list_button_add" t-operation="after">				
+			 <t t-call="customImport"/>
+		</t>
+	</t>
+</templates>

@@ -1,0 +1,150 @@
+<odoo>
+  <data>
+              <record model="ir.ui.view" id="master_component_form_view">
+                <field name="name">master.component.form</field>
+                <field name="model">master.component</field>
+                <field name="type">form</field>
+                <field name="arch" type="xml">
+                    <form string="master_component">
+                    	<sheet>
+                    		<group>
+                    			<field name="name" string="Nama Komponen" required="True"/>
+                    			<field name="estimation" string="Waktu Pengerjaan(Hari)"/>
+                    		</group>
+                    	</sheet>                        
+                    </form>
+                </field>
+            </record>
+            
+            <record model="ir.ui.view" id="master_component_tree_view">
+                <field name="name">master.component.tree</field>
+                <field name="model">master.component</field>
+                <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string="master_component">
+                        <field name="name" string="Nama Komponen"/>
+                    	<field name="estimation" string="Waktu Pengerjaan(Hari)"/>
+                    </tree>
+                </field>
+            </record>
+            
+            <record id="action_master_component"
+				model="ir.actions.act_window">
+				<field name="name">Master Components</field>
+				<field name="res_model">master.component</field>
+				<field name="view_type">form</field>
+				<field name="view_mode">tree,form</field>								
+				<field name="context">{}</field>
+				<field name="help" type="html">
+					<p class="oe_view_nocontent_create">
+						Buat Komponen baru
+					</p>
+				</field>
+			</record>
+			
+			
+		<record model="ir.ui.view" id="master_item_form_view">
+                <field name="name">master.item</field>
+                <field name="model">master.item</field>
+                <field name="type">form</field>
+                <field name="arch" type="xml">
+                    <form string="item_item">
+                    	<header>
+                    		<field name="stage_item" widget="statusbar" clickable="True"/>
+                    	</header>
+                    	<sheet>
+                    		<div class="oe_title">
+		                        <h1>
+		                            <field name="name" placeholder="Nama Item" required="True"/>
+		                        </h1>		                        
+		                    </div>
+                    		<group>
+                    			<group>
+                    				<field name="start_date" string="Tanggal Mulai Pengerjaan" required="True"/>                        		
+                        			<field name="expected_date" string="Ekspektasi Tanggal Selesai" readonly="True"/>
+                    			</group>
+                    				<group>
+                    					<field name="finish_date" string="Real Tanggal Selesai"/>
+                    				</group>                        		
+                        	</group>
+                        	<notebook>
+                        		<page name="component" string="Komponen">
+                        			<field name="component_ids" >
+                        				<tree editable="bottom">
+                        					<field name="component_id" string="Nama Komponen" required="True" options="{'no_create': True}"/>                        					
+                        					<field name="component_estimation" string="Waktu Pengerjaan(Hari)" readonly="True"/>
+                        					<field name="percentage" string="Persentase" required="True"/>                        					
+                        				</tree>
+                        			</field>
+                        			<group class="oe_subtotal_footer oe_right" name="total_percentage">
+                        				<field name="total_percentage" string="Total Persentase"/>
+                        				<field name="total_estimation" string="Total Waktu Pengerjaan(Hari)"/>                        				
+                        			</group>
+                        		</page>
+                        	</notebook>
+                        </sheet>
+                    </form>
+                </field>
+            </record>
+            
+            <record model="ir.ui.view" id="item_item_tree_view">
+                <field name="name">master.item.tree</field>
+                <field name="model">master.item</field>
+                <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string="master_item">
+                        <field name="name" string="Nama Item"/>
+                        <field name="start_date" string="Tanggal Mulai Pengerjaan"/>
+                        <field name="expected_date" string="Ekspektasi Tanggal Selesai"/>                        
+                        <field name="finish_date" string="Real Tanggal Selesai"/>
+                        <field name="stage_item" string="Status"/>
+                    </tree>
+                </field>
+            </record>
+            
+            <record id="master_item_search_view321" model="ir.ui.view">
+            <field name="name">master.item.select</field>
+            <field name="model">master.item</field>
+            <field name="arch" type="xml">
+                <search string="Search Discount">
+                    <field name="name" string="Nama Item"/>                                                            
+                    <filter string="Draft" name="draft" domain="[('stage_item', '=', 'draft')]"/>
+                    <separator/>
+                    <filter string="Proses" name="ongoing" domain="[('stage_item', '=', 'ongoing')]"/>
+                    <separator/>
+                    <filter string="Selesai" name="done" domain="[('stage_item', '=', 'done')]"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter string="Status" name="stage" context="{'group_by': 'stage_item'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+            
+            <record id="action_master_item"
+				model="ir.actions.act_window">
+				<field name="name">Master Items</field>
+				<field name="res_model">master.item</field>
+				<field name="view_type">form</field>
+				<field name="view_mode">tree,form</field>
+				<field name="search_view_id"
+				ref="master_item_search_view321" />								
+				<field name="context">{
+					
+				}</field>
+				<field name="help" type="html">
+					<p class="oe_view_nocontent_create">
+						Buat Item baru
+					</p>
+				</field>
+			</record>
+            
+            <menuitem name="Item"
+            id="menu_component_item"                       
+            sequence="10" groups="base.group_user"/>
+            
+            <menuitem id="master_component_menu" name="Master Komponen" parent="menu_component_item" action="action_master_component"/>
+            <menuitem id="master_item_menu" name="Master Item" parent="menu_component_item" action="action_master_item"/>
+            		
+  </data>
+</odoo>
