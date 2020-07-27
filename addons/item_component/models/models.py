@@ -36,7 +36,7 @@ class itemItem(models.Model):
         for component in res.component_ids : 
             total_percentage += component.percentage                
         if total_percentage >= 0 and total_percentage <= 100 :
-            Persentase
+            pass
         else:
             raise Warning ("Oops, Total Persentase tidak boleh melebihi 100%")       
         return res
