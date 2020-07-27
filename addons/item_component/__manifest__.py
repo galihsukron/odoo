@@ -3,10 +3,10 @@
     'name': "Master Komponen Item",
 
     'summary': """
-        Master Komponen Item""",
+        Master Komponen Item. Tested in Odoo 11""",
 
     'description': """
-        Master Komponen Item
+        Master Komponen Item. Tested in Odoo 11
     """,
 
     'author': "Galih",
